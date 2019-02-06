@@ -1,0 +1,19 @@
+{
+  "name": "vtui",
+  "version": "1.0.0",
+  "description": "Virtual Testing UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Regression",
+    "Testing",
+    "UI"
+  ],
+  "author": "Magnus Fredlundh",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^0.7.4"
+  }
+}
