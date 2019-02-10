@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="u-bg-darkblue-1 u-text-sky-blue u-font-sans">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Visual Testing UI</title>
+	<link rel="stylesheet" href="assets/css/build.css">
+</head>
+<body>
+	<header class="u-text-white u-bg-purple">
+		<div class="u-container u-mx-auto u-flex u-items-center u-py-4 u-mb-10">
+			<h1 class="u-flex-grow">Visual testing UI</h1>
+			<nav>
+				<ul class="u-list-reset u-flex">
+					<li class="u-mr-4"><a href="/about" class="u-text-white">About</a></li>
+					<li><a href="/help" class="u-text-white">Help</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main class="u-container u-mx-auto u-text-sm">
+		<h2 class="u-inline-block u-text-white">Project name here</h2>
+		<div class="c-status c-status--failed">4 failed</div>
+
+		<ul class="u-list-reset u-mt-6">
+			{{#each nodes as |node|}}
+				{{#if failed}}
+					<li>
+						<div class="c-test u-bg-darkblue-3 u-mb-3">
+							<div class="u-flex u-flex-row-reverse u--mx-2 u-p-4 u-items-center">
+								<div class="u-flex-grow u-px-2">
+									<h3 class="u-font-normal" data-collapsable-target="{{node.id}}">{{ node.title }}</h3>
+								</div>
+								<div class="u-px-2">
+									<div class="c-status c-status--failed">Failed</div>
+								</div>
+							</div>
+							<div id="{{node.id}}" class="c-collapsable c-collapsable--collapsed u-bg-darkblue-2 u-p-4">
+								<ul class="c-button-switch">
+									<li><button class="c-button-switch__item">100x100</button></li>
+									<li><button class="c-button-switch__item is-active">200x300</button></li>
+									<li><button class="c-button-switch__item">1920x1080</button></li>
+								</ul>
+
+								{{#each resolutions}}
+								<h2>{{@key}}</h2>
+								{{#each this as |browser| }}
+									{{#if browser.diff }}
+										<div class="u-flex u--mx-2">
+											<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
+												<h4 class="u-p-4 u-text-sm u-font-normal">Reference</h4>
+												<img class="u-block" src="screenshots/reference/{{browser.reference}}.png" alt="Reference image">
+											</div>
+											<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
+												<div class="u-flex u-items-center ">
+													<h4 class="u-p-4 u-flex-grow u-text-sm u-font-normal">Diff</h4>
+													<div>
+														<form action="/okay/{{name}}" method="post">
+															<button class="c-button c-button--primary u-mr-2">Okay!</button>
+														</form>
+													</div>
+												</div>
+												<img class="u-block" src="screenshots/diff/{{browser.diff}}.png" alt="Diff image">
+											</div>
+											<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
+												<h4 class="u-p-4 u-text-sm u-font-normal">Test result</h4>
+												<img class="u-block" src="screenshots/screen/{{browser.screen}}.png" alt="Test result image">
+											</div>
+										</div>
+									{{/if}}
+								{{/each}}
+								{{/each}}
+							</div>
+						</div>
+					</li>
+				{{/if}}
+			{{/each}}
+		</ul>
+	</main>
+
+	<script src="assets/js/main.js" type="module"></script>
+</body>
+</html>

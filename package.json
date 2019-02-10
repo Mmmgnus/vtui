@@ -4,6 +4,7 @@
   "description": "Virtual Testing UI",
   "main": "index.js",
   "scripts": {
+    "css": "npx tailwind build assets/css/main.css -c ./tailwind.js -o ./assets/css/build.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

@@ -1,3 +1,4 @@
+
 const url = require('url');
 // const http = require('http');
 const express = require('express');
@@ -8,6 +9,8 @@ const find = require('find');
 const handlebars = require('handlebars');
 const chalk = require('chalk');
 
+const TestNodes = require('./utilities/test-nodes/test-nodes');
+
 const Handlebars = require('handlebars');
 
 const DIR_TESTS =  __dirname + '/screenshots';
@@ -16,41 +19,50 @@ const PORT = 3002;
 
 let counter = 0;
 
-let nodes = [];
+let nodes;
+
+
+/*
+Name format:
+[test name]_[browser]_[browser version]_[resolution].png
+*/
+
+/*
+nodes = {
+	'[test name]: {
+		title: [test name],
+		resolutions: {
+			[resolution]: {
+				[browser]: {
+					reference: '/',
+					diff: '/',
+					screen: '/'
+				}
+			}
+		}
+	}
+}
+*/
 
 function initFileStructure () {
-	nodes = [];
+	nodes = new TestNodes();
 	find.file(/\.png$/, DIR_TESTS + '/reference', function(files) {
 		files.forEach(function (file) {
-		  createNode(file, 'reference');
+		  nodes.create(file, 'reference');
 		});
 	});
 
 	find.file(/\.png$/, DIR_TESTS + '/diff', function(files) {
 		files.forEach(function (file) {
-		  createNode(file, 'diff');
+			nodes.create(file, 'diff');
 		});
 	});
 
 	find.file(/\.png$/, DIR_TESTS + '/screen', function(files) {
 		files.forEach(function (file) {
-		  createNode(file, 'screen');
+			nodes.create(file, 'screen');
 		});
 	});
-}
-
-function createNode (file, type) {
-	let name = path.basename(file, path.extname(file));
-	let node = (nodes[name]) ? nodes[name] : { id:'test-' + counter++, name: name, path: path.dirname(file), img: {}};
-
-	if (type === 'diff') {
-		node.failed = true;
-	}
-
-	node.img[type] = file;
-	nodes[name] = node;
-
-	return node;
 }
 
 function readFile (file) {
@@ -69,28 +81,6 @@ function renderPage(templateFile, data) {
 	return new Handlebars.SafeString(template(data || {}));
 }
 
-function getNode(id) {
-	var _node;
-	nodes.forEach(function (node) {
-		console.log('lloo');
-		if (node.id == id) {
-			_node = node;
-		}
-	});
-
-	return nodes[0];
-}
-
-function toObject (array) {
-	var obj = {};
-
-	for (let key in nodes) {
-		obj[key] = nodes[key]
-	}
-
-	return obj;
-}
-
 const app = express();
 
 // Assets used by the styleguide.
@@ -98,7 +88,8 @@ app.use('/screenshots', express.static(path.join(__dirname, 'screenshots')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', function (request, response) {
-	const html = renderPage(__dirname + '/index.hbs', {nodes: toObject(nodes)});
+	console.log(nodes.toObject()['visual test'].resolutions);
+	const html = renderPage(__dirname + '/templates/index.hbs', {nodes: nodes.toObject()});
 	response.send(html.string);
 });
 

@@ -1,3 +1,35 @@
+
+/* FONTS
+============================================================================= */
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 400;
+  src: url("../fonts/Inter-Regular.woff2") format("woff2"),
+       url("../fonts/Inter-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 500;
+  src: url("../fonts/Inter-MediumItalic.woff2") format("woff2"),
+       url("../fonts/Inter-MediumItalic.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 600;
+  src: url("../fonts/Inter-SemiBold.woff2") format("woff2"),
+       url("../fonts/Inter-SemiBold.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 700;
+  src: url("../fonts/Inter-Bold.woff2") format("woff2"),
+       url("../fonts/Inter-Bold.woff") format("woff");
+}
+
 /**
  * This injects Tailwind's base styles, which is a combination of
  * Normalize.css and some additional base styles.
@@ -37,39 +69,68 @@
   */
 
   /* BUTTON
-  ----------------------------------------------------------------------------- */
+  ----------------------------------------------------------------------------*/
   .c-button {
-	@apply u-p-2 u-border-2 u-border-sky-blue u-text-sky-blue;
+	  @apply u-p-2 u-border-2 u-border-sky-blue u-text-sky-blue;
   }
 
   .c-button:hover {
-	@apply u-bg-sky-blue u-text-darkblue-1
+	  @apply u-bg-sky-blue u-text-darkblue-1;
   }
 
   .c-button--primary {
-	@apply u-border-lime-green u-text-lime-green;
+	  @apply u-border-lime-green u-text-lime-green;
   }
 
   .c-button--primary:hover {
-	@apply u-bg-lime-green u-text-darkblue-1
+	  @apply u-bg-lime-green u-text-darkblue-1;
   }
 
-
-
   .c-status {
-	@apply u-bg-sky-blue u-text-darkblue-1 u-ml-2 u-py-1 u-px-4 u-inline-block u-rounded u-uppercase u-text-xs
+    @apply u-bg-sky-blue;
+    @apply u-text-darkblue-1;
+    @apply u-ml-2;
+    @apply u-py-1;
+    @apply u-px-4;
+    @apply u-inline-block;
+    @apply u-rounded;
+    @apply u-uppercase;
+    @apply u-text-xs;
   }
 
   .c-status--solved {
-	@apply u-bg-lime-green u-glow-lime-green
+	  @apply u-bg-lime-green u-glow-lime-green;
   }
 
   .c-status--failed {
-	@apply u-bg-pure-pink u-text-white u-glow-pure-pink
+	  @apply u-bg-pure-pink u-text-white u-glow-pure-pink;
   }
 
   .c-collapsable--collapsed {
-	  @apply u-hidden
+	  @apply u-hidden;
+  }
+
+  /* Button switch
+  --------------------------------------------------------------------------- */
+  .c-button-switch {
+    @apply u-list-reset u-inline-flex u-border u-border-sea-blue u-rounded u-overflow-hidden;
+  }
+
+  .c-button-switch__item {
+    @apply u-p-3;
+    @apply u-border-r;
+    @apply u-border-sea-blue;
+    @apply u-text-sky-blue;
+  }
+
+  .c-button-switch > li:last-child > .c-button-switch__item {
+    @apply u-border-none;
+  }
+
+  .c-button-switch__item.is-active,
+  .c-button-switch__item:hover,
+  .c-button-switch__item:focus {
+    @apply u-bg-purple u-text-white;
   }
 
  /**
