@@ -88,8 +88,7 @@ app.use('/screenshots', express.static(path.join(__dirname, 'screenshots')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', function (request, response) {
-	console.log(nodes.toObject()['visual test'].resolutions);
-	const html = renderPage(__dirname + '/templates/index.hbs', {nodes: nodes.toObject()});
+	const html = renderPage(__dirname + '/templates/index.hbs', nodes.toObject());
 	response.send(html.string);
 });
 

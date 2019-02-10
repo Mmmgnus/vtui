@@ -38,39 +38,48 @@
 								</div>
 							</div>
 							<div id="{{node.id}}" class="c-collapsable c-collapsable--collapsed u-bg-darkblue-2 u-p-4">
-								<ul class="c-button-switch">
-									<li><button class="c-button-switch__item">100x100</button></li>
-									<li><button class="c-button-switch__item is-active">200x300</button></li>
-									<li><button class="c-button-switch__item">1920x1080</button></li>
-								</ul>
+								<div class="u-flex u-justify-center u-items-center">
+									<ul class="c-button-switch u-mr-4" data-control-for="{{node.id}}_browser">
+										{{#each browsers}}
+										<li><button class="c-button-switch__item" value="{{ @key }}">{{ @key }}</button></li>
+										{{/each}}
+									</ul>
+
+									<ul class="c-button-switch" data-control-for="{{node.id}}_resolution">
+										{{#each resolutions }}
+										<li><button class="c-button-switch__item" value="{{ @key }}">{{ @key }}</button></li>
+										{{/each}}
+									</ul>
+
+									<form class="u-ml-10" action="/okay/{{name}}" method="post">
+										<button class="c-button c-button--primary u-mr-2">Okay!</button>
+									</form>
+								</div>
 
 								{{#each resolutions}}
-								<h2>{{@key}}</h2>
-								{{#each this as |browser| }}
-									{{#if browser.diff }}
-										<div class="u-flex u--mx-2">
-											<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
-												<h4 class="u-p-4 u-text-sm u-font-normal">Reference</h4>
-												<img class="u-block" src="screenshots/reference/{{browser.reference}}.png" alt="Reference image">
-											</div>
-											<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
-												<div class="u-flex u-items-center ">
-													<h4 class="u-p-4 u-flex-grow u-text-sm u-font-normal">Diff</h4>
-													<div>
-														<form action="/okay/{{name}}" method="post">
-															<button class="c-button c-button--primary u-mr-2">Okay!</button>
-														</form>
-													</div>
+								<div data-section="{{../id}}_resolution_{{@key}}">
+									<h2>{{@key}}</h2>
+									{{#each this as |browser| }}
+										{{#if browser.diff }}
+											<div class="u-flex u--mx-2" data-section="{{../../id}}_browser_{{@key}}">
+												<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
+													<h4 class="u-p-4 u-text-sm u-font-normal">Reference</h4>
+													<img class="u-block" src="screenshots/reference/{{browser.reference}}.png" alt="Reference image">
 												</div>
-												<img class="u-block" src="screenshots/diff/{{browser.diff}}.png" alt="Diff image">
+												<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
+													<div class="u-flex u-items-center ">
+														<h4 class="u-p-4 u-flex-grow u-text-sm u-font-normal">Diff</h4>
+													</div>
+													<img class="u-block" src="screenshots/diff/{{browser.diff}}.png" alt="Diff image">
+												</div>
+												<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
+													<h4 class="u-p-4 u-text-sm u-font-normal">Test result</h4>
+													<img class="u-block" src="screenshots/screen/{{browser.screen}}.png" alt="Test result image">
+												</div>
 											</div>
-											<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
-												<h4 class="u-p-4 u-text-sm u-font-normal">Test result</h4>
-												<img class="u-block" src="screenshots/screen/{{browser.screen}}.png" alt="Test result image">
-											</div>
-										</div>
-									{{/if}}
-								{{/each}}
+										{{/if}}
+									{{/each}}
+								</div>
 								{{/each}}
 							</div>
 						</div>

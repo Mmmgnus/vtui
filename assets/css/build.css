@@ -658,7 +658,7 @@ table {
   list-style: none;
   padding: 0;
   display: inline-flex;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #3b477b;
   border-radius: .25rem;
   overflow: hidden;

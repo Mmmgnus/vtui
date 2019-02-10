@@ -22,7 +22,9 @@ testNodesProto.toObject = function () {
 		nodes[node] = this.nodes[node].toObject();
 	});
 
-	return nodes;
+	return {
+		nodes: nodes
+	};
 };
 
 function Node (title) {
@@ -30,6 +32,7 @@ function Node (title) {
 	this.resolutions = {};
 	this.failed = false;
 	this.id = title.replace(' ', '-');
+	this.browsers = {};
 }
 
 const NodeProto = Node.prototype;
@@ -39,6 +42,7 @@ NodeProto.add = function (parts, type) {
 	const browser = resolutions[parts.browser] || {};
 
 	browser[type] = parts.fileName;
+	this.browsers[parts.browser] = true;
 
 	if (type === 'diff') {
 		this.failed = true;
@@ -52,7 +56,8 @@ NodeProto.toObject = function () {
 		title: this.title,
 		resolutions: this.resolutions,
 		failed: this.failed,
-		id: this.id
+		id: this.id,
+		browsers: this.browsers
 	};
 };
 

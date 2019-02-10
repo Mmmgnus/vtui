@@ -113,7 +113,7 @@
   /* Button switch
   --------------------------------------------------------------------------- */
   .c-button-switch {
-    @apply u-list-reset u-inline-flex u-border u-border-sea-blue u-rounded u-overflow-hidden;
+    @apply u-list-reset u-inline-flex u-border-2 u-border-sea-blue u-rounded u-overflow-hidden;
   }
 
   .c-button-switch__item {
@@ -132,6 +132,7 @@
   .c-button-switch__item:focus {
     @apply u-bg-purple u-text-white;
   }
+
 
  /**
   * This injects all of Tailwind's utility classes, generated based on your
