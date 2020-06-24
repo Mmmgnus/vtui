@@ -11,13 +11,20 @@ export default function initSections (context) {
 
 			console.log('updated', updateId, updateType, updateValue);
 			console.log('section', sectionId, sectionType, sectionValue);
+
 			if (event.detail === section.dataset.section) {
 				console.log('showing', section.dataset.section);
 				section.classList.remove('u-hidden');
+				if (section.dataset.sectionGroup === 'resolution') {
+					section.classList.add('u-flex');
+				}
 			}
 			else if (updateId === sectionId && updateType === sectionType) {
 				console.log('hiding', section.dataset.section, updateType, sectionType);
 				section.classList.add('u-hidden');
+				if (section.dataset.sectionGroup === 'resolution') {
+					section.classList.remove('u-flex');
+				}
 			}
 		});
 	});

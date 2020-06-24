@@ -49,6 +49,7 @@ NodeProto.add = function (parts, type) {
 	}
 	resolutions[parts.browser] = browser;
 	this.resolutions[parts.resolution] = resolutions;
+	this.fileName = parts.fileName;
 };
 
 NodeProto.toObject = function () {
@@ -57,7 +58,8 @@ NodeProto.toObject = function () {
 		resolutions: this.resolutions,
 		failed: this.failed,
 		id: this.id,
-		browsers: this.browsers
+		browsers: this.browsers,
+		fileName: this.fileName
 	};
 };
 

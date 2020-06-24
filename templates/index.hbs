@@ -51,7 +51,7 @@
 										{{/each}}
 									</ul>
 
-									<form class="u-ml-10" action="/okay/{{name}}" method="post">
+									<form class="u-ml-10" action="/okay/{{node.fileName}}" method="post">
 										<button class="c-button c-button--primary u-mr-2">Okay!</button>
 									</form>
 								</div>
@@ -61,7 +61,7 @@
 									<h2>{{@key}}</h2>
 									{{#each this as |browser| }}
 										{{#if browser.diff }}
-											<div class="u-flex u--mx-2" data-section="{{../../id}}_browser_{{@key}}">
+											<div class="u-flex u--mx-2" data-section-group="resolution" data-section="{{../../id}}_browser_{{@key}}">
 												<div class="u-flex-auto u-mx-2 u-border u-border-sea-blue">
 													<h4 class="u-p-4 u-text-sm u-font-normal">Reference</h4>
 													<img class="u-block" src="screenshots/reference/{{browser.reference}}.png" alt="Reference image">

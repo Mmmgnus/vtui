@@ -98,7 +98,7 @@ app.post('/okay/:name', function (request, response) {
 	const oldPath = path.join(__dirname, 'screenshots', 'screen', name + '.png');
 	const newPath = path.join(__dirname, 'screenshots', 'reference', name + '.png');
 	fs.renameSync(oldPath, newPath);
-	fs.unlink(path.join(__dirname, 'screenshots', 'diff', name + '.png'));
+	fs.unlinkSync(path.join(__dirname, 'screenshots', 'diff', name + '.png'));
 
 	initFileStructure();
 	response.send('DONE!');
